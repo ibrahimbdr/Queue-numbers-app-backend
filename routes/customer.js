@@ -25,7 +25,8 @@ router.post('/login', async(req, res) => {
             const token = jwt.sign({
                 data: {name: customer.name, phone: customer.phone, customerId: customer.id}
             }, process.env.SECRET)
-            res.send(token);
+            customer.token = token;
+            res.send(customer);
         }else{
             res.status(403).send("Invalid Authentication");
         }

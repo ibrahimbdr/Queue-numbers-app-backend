@@ -10,7 +10,8 @@ router.post('/', auth, async(req, res) => {
         const appointmentCustomer = await getUserAppointment(req.customerId);
         // console.log(appointmentCustomer.customer.id);
         if(appointmentCustomer!=undefined){
-            res.json("You already have an appointment");
+            const appointmentCustomer = await getUserAppointment(req.customerId);
+            res.json(appointmentCustomer);
         }else{
             const allAppointments = await getAppointments();
             console.log(allAppointments);

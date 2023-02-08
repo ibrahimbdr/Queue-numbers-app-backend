@@ -7,6 +7,7 @@ const customerSchema = mongoose.Schema(
         name: { type: 'string', required: true, unique: true},
         phone: { type: 'string', required: true, unique: true},
         appointment: {type: mongoose.Schema.ObjectId, ref: 'Appoinment'},
+        token: { type: String },
     }
 )
 
