@@ -20,7 +20,7 @@ function deleteAppointment(id){
 
 
 function getAppointments() {
-    return appointmentModel.find().populate("customer", "name");
+    return appointmentModel.find();
 }
 
 
@@ -29,9 +29,9 @@ function getAppointmentById(id) {
 }
 
 
-function getUserAppointment(number) {
-    const appointmentUserId = appointmentModel.find({ number: number });
-    return customerModel.find({id: appointmentUserId.customer}).populate("name","name");
+function getUserAppointment(id) {
+    
+    return appointmentModel.findOne({ customer: id }).populate("customer","name");
 }
 
 

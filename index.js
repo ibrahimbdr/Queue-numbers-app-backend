@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-mongoose.connect(`mongodb://localhost:27017/frontdesk/`);
+mongoose.connect(`mongodb://localhost:27017/frontdesk`);
 app.use(cors({
     origin: '*'
 }));

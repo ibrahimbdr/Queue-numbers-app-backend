@@ -2,6 +2,7 @@ const express = require('express');
 const { createCustomer, updateCustomer, deleteCustomer, getCustomers, getCustomerById, getCustomerByPhone } = require('../controllers/customer');
 const { customerModel } = require('../models/customer');
 const { auth } = require('../authentication/auth');
+const jwt = require('jsonwebtoken');
 
 const router = express();
 
