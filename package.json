@@ -1,0 +1,32 @@
+{
+  "name": "front-desk-back",
+  "version": "1.0.0",
+  "description": "backend for front-desk app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ibrahimbdr/front-desk-back.git"
+  },
+  "author": "Ibrahim M. Badr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibrahimbdr/front-desk-back/issues"
+  },
+  "homepage": "https://github.com/ibrahimbdr/front-desk-back#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.1",
+    "mongoose-timestamp": "^0.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
