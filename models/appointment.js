@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
 const timestamps = require('mongoose-timestamp');
 
 const appointmentSchema = mongoose.Schema(
@@ -12,13 +11,6 @@ const appointmentSchema = mongoose.Schema(
 appointmentSchema.plugin(timestamps);
 
 
-// customerSchema.pre("save", function (next) {
-//     const salt = bcrypt.genSaltSync(10);
-//     const hash = bcrypt.hashSync(this.phone, salt);
-//     this.phone = hash;
-
-//     next();
-// })
 
 const appointmentModel = mongoose.model('Appointment', appointmentSchema);
 module.exports = { appointmentModel };
