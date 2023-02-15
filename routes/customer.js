@@ -19,8 +19,8 @@ router.post('/', async(req, res) => {
 
 router.post('/login', async(req, res) => {
     try{
-        const { name, phone } = req.body;
-        const customer = await customerModel.findOne({name: name, phone: phone});
+        const { phone } = req.body;
+        const customer = await customerModel.findOne({phone: phone});
         if(customer){
             const token = jwt.sign({
                 data: {name: customer.name, phone: customer.phone, customerId: customer.id}
@@ -46,16 +46,16 @@ router.patch('/:id', auth, async (req, res) => {
     }
 })
 
-router.delete('/:id', auth, async (req, res) => {
-    try {
-        const id = req.params.id;
-        const customerToDelete = req.body;
-        const deletedCustomer = await deleteCustomer(IDBTransaction, customerToDelete);
-        res.json(deletedCustomer);
-    }catch (err) {
-        res.status(500).send(err.message);
-    }
-})
+// router.delete('/', auth, async (req, res) => {
+//     try {
+            // const id = req.userId
+//         const customerToDelete = req.body;
+//         const deletedCustomer = await deleteCustomer(id);
+//         res.json(deletedCustomer);
+//     }catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// })
 
 router.get('/', auth, async(req, res) => {
     try{

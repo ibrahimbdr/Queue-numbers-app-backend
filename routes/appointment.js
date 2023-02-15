@@ -53,10 +53,11 @@ router.delete('/:id', auth, async (req, res) => {
     }
 })
 
-router.get('/', auth, async(req, res) => {
+router.get('/',  auth, async(req, res) => {
     try{
         const appointmentCustomer = await getUserAppointment(req.customerId);
-        res.json(appointmentCustomer);
+        const appointments = await getAppointments();
+        res.json(appointments);
     }catch(err){
         res.status(500).send(err.message);
     }
