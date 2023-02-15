@@ -1,23 +1,23 @@
 {
-  "name": "front-desk-back",
+  "name": "Queue-numbers-app-backend",
   "version": "1.0.0",
-  "description": "backend for front-desk app",
+  "description": "Queue-numbers-app-backend",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ibrahimbdr/front-desk-back.git"
+    "url": "git+ssh://git@github.com/ibrahimbdr/Queue-numbers-app-backend.git"
   },
   "author": "Ibrahim M. Badr",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ibrahimbdr/front-desk-back/issues"
+    "url": "https://github.com/ibrahimbdr/Queue-numbers-app-backend/issues"
   },
-  "homepage": "https://github.com/ibrahimbdr/front-desk-back#readme",
+  "homepage": "https://github.com/ibrahimbdr/Queue-numbers-app-backend#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
