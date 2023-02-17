@@ -5,19 +5,20 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js",
-    
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/ibrahimbdr/Queue-numbers-app-backend.git"
   },
+
   "author": "Ibrahim M. Badr",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ibrahimbdr/Queue-numbers-app-backend/issues"
   },
   "homepage": "https://github.com/ibrahimbdr/Queue-numbers-app-backend#readme",
+
   "dependencies": {
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",

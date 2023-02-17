@@ -1,36 +1,42 @@
-const { appointmentModel } = require('../models/appointment');
-const { customerModel } = require('../models/customer');
-
-
+const { appointmentModel } = require("../models/appointment");
+const { customerModel } = require("../models/customer");
 
 function createCustomer(newCustomer) {
-    
-    return customerModel.create(newCustomer);
+  return customerModel.create(newCustomer);
 }
 
-
-function updateCustomer(id, data){
-    return customerModel.update({_id: id}, data, {runValidators: true});
+function updateCustomer(id, data) {
+  return customerModel.update({ _id: id }, data, { runValidators: true });
 }
 
-
-function deleteCustomer(id){
-    return customerModel.findByIdAndRemove(id);
+function deleteCustomer(id) {
+  return customerModel.findByIdAndRemove(id);
 }
-
 
 function getCustomers() {
-    return customerModel.find().populate("appointment", "number");
+  return customerModel
+    .find()
+    .populate("appointment", "number", "status")
+    .populate("appointment", "number", "status");
 }
-
 
 function getCustomerById(id) {
-    return customerModel.find({id: id}).populate("appointment", "number");
+  return customerModel
+    .find({ id: id })
+    .populate("appointment", "number", "status");
 }
-
 
 function getCustomerByPhone(phone) {
-    return customerModel.find({phone: phone}).populate("appointment", "number");
+  return customerModel
+    .find({ phone: phone })
+    .populate("appointment", "number", "status");
 }
 
-module.exports = { createCustomer, updateCustomer, deleteCustomer, getCustomers, getCustomerById, getCustomerByPhone };
+module.exports = {
+  createCustomer,
+  updateCustomer,
+  deleteCustomer,
+  getCustomers,
+  getCustomerById,
+  getCustomerByPhone,
+};

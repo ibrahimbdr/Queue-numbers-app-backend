@@ -1,39 +1,37 @@
-const { appointmentModel } = require('../models/appointment');
-const { customerModel } = require('../models/customer');
-
-
+const { appointmentModel } = require("../models/appointment");
+const { customerModel } = require("../models/customer");
 
 function createAppointment(appointment) {
-    
-    return appointmentModel.create(appointment);
+  return appointmentModel.create(appointment);
 }
 
-
-function updateAppointment(id, number){
-    return appointmentModel.update({_id: id}, number, {runValidators: true});
+function updateAppointment(id, number) {
+  return appointmentModel.update({ _id: id }, number, { runValidators: true });
 }
 
-
-function deleteAppointment(id){
-    return appointmentModel.findByIdAndRemove(id);
+function deleteAppointment(id) {
+  return appointmentModel.findByIdAndRemove(id);
 }
-
 
 function getAppointments() {
-    return appointmentModel.find();
+  return appointmentModel.find().populate("customer", "name");
 }
-
 
 function getAppointmentById(id) {
-    return appointmentModel.find({id: id}).populate("customer","name");
+  return appointmentModel.find({ id: id }).populate("customer", "name");
 }
-
 
 function getUserAppointment(id) {
-    
-    return appointmentModel.findOne({ customer: id }).populate("customer","name");
+  return appointmentModel
+    .findOne({ customer: id })
+    .populate("customer", "name");
 }
 
-
-
-module.exports = { createAppointment, updateAppointment, deleteAppointment, getAppointmentById, getAppointments, getUserAppointment };
+module.exports = {
+  createAppointment,
+  updateAppointment,
+  deleteAppointment,
+  getAppointmentById,
+  getAppointments,
+  getUserAppointment,
+};
