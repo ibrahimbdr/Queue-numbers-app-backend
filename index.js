@@ -3,6 +3,7 @@ const express = require("express");
 const customerRouter = require("./routes/customer");
 const appointmentRouter = require("./routes/appointment");
 const adminRouter = require("./routes/admin/admin");
+const managerRouter = require("./routes/manager");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/appointment", appointmentRouter);
 app.use("/customer", customerRouter);
 app.use("/admin", adminRouter);
+app.use("/manager", managerRouter);
 
 app.use("*", (req, res, next) => {
   res.status(404).send("Page is Not Found");

@@ -7,6 +7,7 @@ const customerSchema = mongoose.Schema({
   appointment: { type: mongoose.SchemaTypes.ObjectId, ref: "Appoinment" },
   active: { type: "boolean", default: true },
   token: { type: String },
+  isAdmin: { type: "boolean", default: false, enum: [false] },
 });
 
 customerSchema.plugin(timestamps);
