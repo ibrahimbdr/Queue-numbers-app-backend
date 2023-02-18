@@ -11,16 +11,15 @@
     "type": "git",
     "url": "git+ssh://git@github.com/ibrahimbdr/Queue-numbers-app-backend.git"
   },
-
   "author": "Ibrahim M. Badr",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ibrahimbdr/Queue-numbers-app-backend/issues"
   },
   "homepage": "https://github.com/ibrahimbdr/Queue-numbers-app-backend#readme",
-
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",

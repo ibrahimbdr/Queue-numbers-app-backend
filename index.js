@@ -8,14 +8,13 @@ const cors = require("cors");
 
 const app = express();
 mongoose.connect(`mongodb://localhost:27017/frontdesk`);
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    // preflightContinue: false,
-    // optionsSuccessStatus: 204,
-  })
-);
+const options = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(options));
 
 app.use(express.json());
 
