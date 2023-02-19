@@ -29,15 +29,15 @@ const {
 
 const router = express();
 
-router.post("/", async (req, res, next) => {
-  try {
-    const newManager = await createManager(req.body);
-    console.log(newManager);
-    res.json(newManager);
-  } catch (error) {
-    res.status(401).send(error);
-  }
-});
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const newManager = await createManager(req.body);
+//     console.log(newManager);
+//     res.json(newManager);
+//   } catch (error) {
+//     res.status(401).send(error);
+//   }
+// });
 
 router.patch("/", auth, managerRole, async function (req, res, next) {
   try {
@@ -65,11 +65,11 @@ router.post("/login", async function (req, res, next) {
   const manager = await managerModel.findOne({ username: username });
   if (manager) {
     let passwordString = password.toString();
-    const validatePass = bcrypt.compareSync(passwordString, admin.password);
+    const validatePass = bcrypt.compareSync(passwordString, manager.password);
     if (validatePass) {
       const token = jwt.sign(
         {
-          data: { username: username, userId: admin.id },
+          data: { username: username, userId: manager.id },
         },
         process.env.SECRET,
         { expiresIn: "20d" }
