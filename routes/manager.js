@@ -84,7 +84,7 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/customer/", async (req, res) => {
   try {
     const newCustomer = await createCustomer(req.body);
     console.log(newCustomer);
