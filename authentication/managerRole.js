@@ -1,12 +1,12 @@
-const { adminModel } = require("../models/manager");
+const { managerModel } = require("../models/manager");
 
 async function managerRole(req, res, next) {
-  const manager = await adminModel.findById(req.userId);
+  const manager = await managerModel.findById(req.userId);
   console.log(manager);
   if (manager != null) {
     next();
   } else {
-    res.status(403).send("You must be an admin!!!");
+    res.status(403).send("You must be a Manager!!!");
   }
 }
 

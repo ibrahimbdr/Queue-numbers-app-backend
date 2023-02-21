@@ -5,11 +5,15 @@ function createManager(newManager) {
 }
 
 function updateManager(id, newManager) {
-  return managerModel.update(id, newManager);
+  return managerModel.update({ _id: id }, newManager, { runValidators: true });
 }
 
 function getManagerById(id) {
   return managerModel.findById(id);
 }
 
-module.exports = { createManager, updateManager, getManagerById };
+function getManagers() {
+  return managerModel.find();
+}
+
+module.exports = { createManager, updateManager, getManagerById, getManagers };

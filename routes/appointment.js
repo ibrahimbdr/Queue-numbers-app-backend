@@ -13,10 +13,10 @@ const router = express();
 
 router.post("/", auth, async (req, res) => {
   try {
-    const appointmentCustomer = await getUserAppointment(req.customerId);
+    const appointmentCustomer = await getUserAppointment(req.userId);
     // console.log(appointmentCustomer.customer.id);
     if (appointmentCustomer != undefined) {
-      const appointmentCustomer = await getUserAppointment(req.customerId);
+      const appointmentCustomer = await getUserAppointment(req.userId);
       res.json(appointmentCustomer);
     } else {
       const allAppointments = await getAppointments();
@@ -28,12 +28,12 @@ router.post("/", auth, async (req, res) => {
         );
         newAppointment = await createAppointment({
           number: lastAppointment + 1,
-          customer: req.customerId,
+          customer: req.userId,
         });
       } else {
         newAppointment = await createAppointment({
           number: 1,
-          customer: req.customerId,
+          customer: req.userId,
         });
       }
       console.log(newAppointment);
@@ -71,7 +71,7 @@ router.delete("/:id", auth, async (req, res) => {
 
 router.get("/", auth, async (req, res) => {
   try {
-    const appointmentCustomer = await getUserAppointment(req.customerId);
+    const appointmentCustomer = await getUserAppointment(req.userId);
     res.json(appointmentCustomer);
   } catch (err) {
     res.status(500).send(err.message);

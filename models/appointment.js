@@ -8,7 +8,7 @@ const appointmentSchema = mongoose.Schema({
     enum: ["Waiting", "Finished"],
     default: "Waiting",
   },
-  customer: { type: mongoose.Schema.ObjectId, ref: "Customer" },
+  customer: { type: mongoose.SchemaTypes.ObjectId, ref: "Customer" },
 });
 
 appointmentSchema.plugin(timestamps);

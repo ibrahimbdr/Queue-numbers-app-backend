@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
           data: {
             name: customer.name,
             phone: customer.phone,
-            customerId: customer.id,
+            userId: customer.id,
           },
         },
         process.env.SECRET

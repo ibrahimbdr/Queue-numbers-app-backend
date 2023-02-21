@@ -26,17 +26,32 @@ const {
   getAppointments,
   getUserAppointment,
 } = require("../../controllers/appointment");
-const { createManager } = require("../../controllers/manager");
+const {
+  createManager,
+  getManagerById,
+  getManagers,
+} = require("../../controllers/manager");
+const { createShop, updateShop, getShop } = require("../../controllers/shop");
 
 const router = express();
 
-router.post("/", auth, adminRole, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newAdmin = await createAdmin(req.body);
     console.log(newAdmin);
     res.json(newAdmin);
   } catch (error) {
-    res.status(401).send(error);
+    res.status(409).send(error);
+  }
+});
+
+router.get("/checkmaching/", async (req, res, next) => {
+  try {
+    const existingAdmins = await adminModel.find();
+    console.log(existingAdmins);
+    res.json(existingAdmins);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 
@@ -53,6 +68,7 @@ router.patch("/", auth, adminRole, async function (req, res, next) {
 
 router.get("/", auth, adminRole, async function (req, res) {
   try {
+    console.log(req.userId);
     const id = req.userId;
     const myAccountInfo = await getAdminById(id);
     res.json(myAccountInfo);
@@ -61,9 +77,43 @@ router.get("/", auth, adminRole, async function (req, res) {
   }
 });
 
+////////////////////////////////////////////////////////////////
+router.post("/shop", async (req, res, next) => {
+  try {
+    const newShop = await createShop({ shopName: "My Shop" });
+    console.log(newShop);
+    res.json(newShop);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+});
+
+router.patch("/shop/:id", auth, adminRole, async function (req, res, next) {
+  try {
+    const myShopId = req.params.id;
+    const newShopData = req.body;
+    console.log(req.body);
+    const updatedShop = await updateShop(myShopId, newShopData);
+    res.json(updatedShop);
+  } catch (err) {
+    res.status(422).send(err);
+  }
+});
+
+router.get("/shop/", async function (req, res) {
+  try {
+    const myShop = await getShop();
+    res.json(myShop);
+  } catch (err) {
+    res.status(422).send(err);
+  }
+});
+////////////////////////////////////////////////////////////////////////
+
 router.post("/login", async function (req, res, next) {
   const { username, password } = req.body;
   const admin = await adminModel.findOne({ username: username });
+  console.log(admin.id);
   if (admin) {
     let passwordString = password.toString();
     const validatePass = bcrypt.compareSync(passwordString, admin.password);
@@ -75,7 +125,7 @@ router.post("/login", async function (req, res, next) {
         process.env.SECRET,
         { expiresIn: "20d" }
       );
-
+      console.log({ username: username, userId: admin.id });
       res.json(token);
     } else {
       res.status(401).json("Invalid credentials");
@@ -90,6 +140,16 @@ router.post("/manager", async (req, res, next) => {
     const newManager = await createManager(req.body);
     console.log(newManager);
     res.json(newManager);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+});
+
+router.get("/manager", async (req, res, next) => {
+  try {
+    const managers = await getManagers();
+    console.log(managers);
+    res.json(managers);
   } catch (error) {
     res.status(401).send(error);
   }
@@ -162,7 +222,7 @@ router.delete("/appointment/:id", auth, async (req, res) => {
 
 router.get("/appointment/", async (req, res) => {
   try {
-    const appointmentCustomer = await getUserAppointment(req.customerId);
+    const appointmentCustomer = await getUserAppointment(req.userId);
     const appointments = await getAppointments();
     res.json(appointments);
   } catch (err) {

@@ -161,7 +161,7 @@ router.delete("/appointment/:id", auth, async (req, res) => {
 
 router.get("/appointment/", async (req, res) => {
   try {
-    const appointmentCustomer = await getUserAppointment(req.customerId);
+    const appointmentCustomer = await getUserAppointment(req.userId);
     const appointments = await getAppointments();
     res.json(appointments);
   } catch (err) {

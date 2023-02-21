@@ -14,22 +14,15 @@ function deleteCustomer(id) {
 }
 
 function getCustomers() {
-  return customerModel
-    .find()
-    .populate("appointment", "number", "status")
-    .populate("appointment", "number", "status");
+  return customerModel.find();
 }
 
 function getCustomerById(id) {
-  return customerModel
-    .find({ id: id })
-    .populate("appointment", "number", "status");
+  return customerModel.find({ id: id });
 }
 
 function getCustomerByPhone(phone) {
-  return customerModel
-    .find({ phone: phone })
-    .populate("appointment", "number", "status");
+  return customerModel.find({ phone: phone });
 }
 
 module.exports = {
