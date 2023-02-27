@@ -176,25 +176,6 @@ router.delete("/customer/:id", auth, async (req, res) => {
   }
 });
 
-router.get("/customer/", async (req, res) => {
-  try {
-    const customers = await getCustomers();
-    res.json(customers);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-router.get("/customer/:id", auth, async (req, res) => {
-  try {
-    const id = req.params.id;
-    const customer = await getCustomerById(id);
-    res.json(customer);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
 router.patch("/appointment/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;

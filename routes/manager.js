@@ -29,16 +29,9 @@ const {
 
 const router = express();
 
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const newManager = await createManager(req.body);
-//     console.log(newManager);
-//     res.json(newManager);
-//   } catch (error) {
-//     res.status(401).send(error);
-//   }
-// });
+// required routes for manager account
 
+// update manager information
 router.patch("/", auth, managerRole, async function (req, res, next) {
   try {
     const myAccountId = req.userId;
@@ -50,6 +43,7 @@ router.patch("/", auth, managerRole, async function (req, res, next) {
   }
 });
 
+// get manager information
 router.get("/", auth, managerRole, async function (req, res) {
   try {
     const id = req.userId;
@@ -60,6 +54,7 @@ router.get("/", auth, managerRole, async function (req, res) {
   }
 });
 
+// handling login and returing token
 router.post("/login", async function (req, res, next) {
   const { username, password } = req.body;
   const manager = await managerModel.findOne({ username: username });
@@ -84,7 +79,8 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-router.post("/customer/", async (req, res) => {
+// creating a new customer from dashboard - manager account
+router.post("/customer/", auth, managerRole, async (req, res) => {
   try {
     const newCustomer = await createCustomer(req.body);
     console.log(newCustomer);
@@ -94,7 +90,8 @@ router.post("/customer/", async (req, res) => {
   }
 });
 
-router.patch("/customer/:id", auth, async (req, res) => {
+// modifying customer information
+router.patch("/customer/:id", auth, managerRole, async (req, res) => {
   try {
     const id = req.params.id;
     const customerToUpdate = req.body;
@@ -105,7 +102,8 @@ router.patch("/customer/:id", auth, async (req, res) => {
   }
 });
 
-router.delete("/customer/:id", auth, async (req, res) => {
+// delete Customer from database
+router.delete("/customer/:id", auth, managerRole, async (req, res) => {
   try {
     const id = req.params.id;
     const deletedCustomer = await deleteCustomer(id);
@@ -115,6 +113,7 @@ router.delete("/customer/:id", auth, async (req, res) => {
   }
 });
 
+// geting all the customers
 router.get("/customer/", async (req, res) => {
   try {
     const customers = await getCustomers();
@@ -124,6 +123,7 @@ router.get("/customer/", async (req, res) => {
   }
 });
 
+// geting customers by id
 router.get("/customer/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
@@ -134,6 +134,7 @@ router.get("/customer/:id", auth, async (req, res) => {
   }
 });
 
+// modifying appointment by id
 router.patch("/appointment/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
@@ -145,6 +146,7 @@ router.patch("/appointment/:id", auth, async (req, res) => {
   }
 });
 
+// deleting appointment from database
 router.delete("/appointment/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
@@ -159,6 +161,7 @@ router.delete("/appointment/:id", auth, async (req, res) => {
   }
 });
 
+// getting all the appointments
 router.get("/appointment/", async (req, res) => {
   try {
     const appointmentCustomer = await getUserAppointment(req.userId);
@@ -169,6 +172,7 @@ router.get("/appointment/", async (req, res) => {
   }
 });
 
+//getting appointment by id
 router.get("/appointment/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;

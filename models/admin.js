@@ -9,6 +9,7 @@ const adminSchema = mongoose.Schema({
   isAdmin: { type: "boolean", default: true, enum: [true] },
 });
 
+// for hashing passsword before saving in database
 adminSchema.pre("save", function (next) {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(this.password, salt);

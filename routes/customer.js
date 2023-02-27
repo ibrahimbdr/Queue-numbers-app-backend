@@ -48,28 +48,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.patch("/:id", auth, async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const customerToUpdate = req.body;
-//     const updatedCustomer = await updateCustomer(id, customerToUpdate);
-//     res.json(updatedCustomer);
-//   } catch (err) {
-//     res.status(404).send(err.message);
-//   }
-// });
-
-// router.delete('/', auth, async (req, res) => {
-//     try {
-// const id = req.userId
-//         const customerToDelete = req.body;
-//         const deletedCustomer = await deleteCustomer(id);
-//         res.json(deletedCustomer);
-//     }catch (err) {
-//         res.status(500).send(err.message);
-//     }
-// })
-
 router.get("/", async (req, res) => {
   try {
     // if (req.body.phone != null) {
