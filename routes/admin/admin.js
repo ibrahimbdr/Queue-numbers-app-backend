@@ -191,10 +191,7 @@ router.delete("/appointment/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
     const AppointmentToDelete = req.body;
-    const deletedAppointment = await deleteAppointment(
-      IDBTransaction,
-      AppointmentToDelete
-    );
+    const deletedAppointment = await deleteAppointment(id);
     res.json(deletedAppointment);
   } catch (err) {
     res.status(500).send(err.message);

@@ -17,6 +17,10 @@ function getAppointments() {
   return appointmentModel.find().populate("customer", "name");
 }
 
+function getLastAppoinment() {
+  return appointmentModel.findOne({}, {}, { sort: { createdAt: -1 } });
+}
+
 function getAppointmentById(id) {
   return appointmentModel.find({ id: id }).populate("customer", "name");
 }
@@ -33,5 +37,6 @@ module.exports = {
   deleteAppointment,
   getAppointmentById,
   getAppointments,
+  getLastAppoinment,
   getUserAppointment,
 };

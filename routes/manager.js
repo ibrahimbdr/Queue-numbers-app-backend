@@ -43,7 +43,7 @@ router.patch("/", auth, managerRole, async function (req, res, next) {
   }
 });
 
-// get manager information
+// get managers information
 router.get("/", auth, managerRole, async function (req, res) {
   try {
     const id = req.userId;
@@ -51,6 +51,17 @@ router.get("/", auth, managerRole, async function (req, res) {
     res.json(myAccountInfo);
   } catch (err) {
     res.status(422).send(err);
+  }
+});
+
+// get existing managers
+router.get("/checkmaching/", async (req, res, next) => {
+  try {
+    const existingManagers = await managerModel.find();
+    console.log(existingManagers);
+    res.json(existingManagers);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 
@@ -151,10 +162,7 @@ router.delete("/appointment/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
     const AppointmentToDelete = req.body;
-    const deletedAppointment = await deleteAppointment(
-      IDBTransaction,
-      AppointmentToDelete
-    );
+    const deletedAppointment = await deleteAppointment(id);
     res.json(deletedAppointment);
   } catch (err) {
     res.status(500).send(err.message);
