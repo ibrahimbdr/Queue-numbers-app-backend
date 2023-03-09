@@ -13,6 +13,10 @@ function deleteAppointment(id) {
   return appointmentModel.findByIdAndRemove(id);
 }
 
+function deleteAllAppointments() {
+  return appointmentModel.deleteMany({});
+}
+
 function getAppointments() {
   return appointmentModel.find().populate("customer", "name");
 }
@@ -35,6 +39,7 @@ module.exports = {
   createAppointment,
   updateAppointment,
   deleteAppointment,
+  deleteAllAppointments,
   getAppointmentById,
   getAppointments,
   getLastAppoinment,

@@ -22,6 +22,7 @@ const {
   createAppointment,
   updateAppointment,
   deleteAppointment,
+  deleteAllAppointments,
   getAppointmentById,
   getAppointments,
   getUserAppointment,
@@ -182,6 +183,16 @@ router.patch("/appointment/:id", auth, async (req, res) => {
     const AppointmentToUpdate = req.body;
     const updatedAppointment = await updateAppointment(id, AppointmentToUpdate);
     res.json(updatedAppointment);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+router.delete("/appointment/", auth, async (req, res) => {
+  try {
+    const AppointmentsToDelete = req.body;
+    const deletedAppointments = await deleteAllAppointments();
+    res.json(deletedAppointments);
   } catch (err) {
     res.status(500).send(err.message);
   }
